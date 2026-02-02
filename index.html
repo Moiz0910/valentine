@@ -1,0 +1,123 @@
+valentine.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Be My Valentine?</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(#ffe6f2, #ffd1e8);
+  overflow: hidden;
+  margin: 0;
+  padding-top: 40px;
+}
+
+/* Make content centered nicely on mobile */
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 30px;
+  animation: floatUp 6s linear infinite;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-900px) scale(1.5); opacity: 0; }
+}
+
+/* Buttons */
+button {
+  font-size: 18px;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+#yes {
+  background-color: #ff66b2;
+  color: white;
+}
+
+#no {
+  background-color: #cccccc;
+  position: absolute;
+}
+
+/* Title animation */
+h1 {
+  animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Make text look good on mobile */
+#response {
+  font-size: 18px;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Will you be my Valentine? 💖</h1>
+
+<button id="yes" onclick="yes()">Yes 💕</button>
+<button id="no" onmouseover="moveNo()" ontouchstart="moveNo()">No 😅</button>
+
+<p id="response"></p>
+</div>
+
+<script>
+// Floating hearts generator
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.innerHTML = "❤️";
+  heart.className = "heart";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.fontSize = (20 + Math.random() * 30) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 600);
+
+// Moving "No" button (works on mobile too)
+function moveNo() {
+  const noBtn = document.getElementById("no");
+
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+// Yes button response
+function yes() {
+  document.getElementById("response").innerHTML =
+    "Yay! You’re my Valentine 🥰💖";
+}
+</script>
+
+</body>
+</html>
